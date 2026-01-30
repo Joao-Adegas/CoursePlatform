@@ -2,22 +2,28 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } fr
 import { ComponentProps } from "react";
 import Link from "next/link";
 import Logo from "@/assets/logo.svg"
+import LogoIcon from "@/assets/logo-icon.svg"
+import { NavItens } from "./nav-itens";
+import { NavUser } from "@/app/types/nav-user";
 
 type AppSidebarProps = ComponentProps<typeof Sidebar>
 
-export const AppSidebar = ({...props}: AppSidebarProps) => {
-    return(
+export const AppSidebar = ({ ...props }: AppSidebarProps) => {
+    return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader className="py-4">
-                <Link href="/"> <Logo/> </Link>
+                <Link href="/">
+                    <Logo className="w-full max-w-[150px] mx-auto pt-3 sm:hidden group-data-[state=expanded]:block" />
+                    <LogoIcon className="w-full max-w-[20px] mx-auto pt-3 hidden group-data-[state=collapsed]:block" />
+                </Link>
             </SidebarHeader>
             <SidebarContent>
-                <p>Sidebar content</p>
+                <NavItens/>
             </SidebarContent>
             <SidebarFooter>
-                <p>Sidebar footer</p>
+                <NavUser/>
             </SidebarFooter>
-            <SidebarRail/> 
+            <SidebarRail />
         </Sidebar>
     )
 }

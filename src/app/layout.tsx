@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import "./globals.css";
 import { cn } from "@/lib/utils";
-;
+import { ClerkProvider } from "@clerk/nextjs";
+import { ptBR } from "@clerk/localizations"
 
+import "../styles/clerk.css"
+import "../styles/globals.css"
 
 const nunito = Nunito({
   variable: "--font-sans",
@@ -21,10 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body className={cn(nunito.variable, "antialiades font-sans dark")}>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider localization={ptBR} appearance={
+      {variables:{
+        colorPrimary: "hsl(160 100% 37%)",
+      },}}>
+      <html lang="pt-BR" suppressHydrationWarning>
+        <body className={cn(nunito.variable, "antialiades font-sans dark")}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
